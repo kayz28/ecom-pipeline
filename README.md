@@ -27,6 +27,8 @@ This project implements a **scalable data engineering pipeline** for a mid-size 
 ## Flow
 Generate raw data -> read raw data in chunks -> clean data -> write in partitioned format (month/region) -> create table in duck db on top partitioned parquet files -> create aggregates -> create dashboards
 
+Currently we are using single CSV as source if we need to have incremental data loads then we will use Airflow while maintaining offsets etc.
+
 ## Data Schema
 
 | Field Name       | Type   | Description |
