@@ -46,7 +46,9 @@ Generate raw data -> read raw data in chunks -> clean data -> write in partition
 
 [Watch demo video](demo/Screen%20Recording%202025-09-28%20at%203.02.50%20PM%202.mov)
 
+<img width="1434" height="645" alt="Screenshot 2025-09-28 at 3 14 44 PM" src="https://github.com/user-attachments/assets/0e4a73d4-2798-450f-9d21-cfd557047aef" />
 
+<img width="1397" height="752" alt="Screenshot 2025-09-28 at 3 14 51 PM" src="https://github.com/user-attachments/assets/b28914c1-906d-4a12-8bc3-db5dadea4a76" />
 
 ## Project Structure
 
