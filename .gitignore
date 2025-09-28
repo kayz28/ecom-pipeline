@@ -1,0 +1,7 @@
+venv
+sales_raw.csv
+data/raw/
+data/cleaned/
+*.parquet
+*.duckdb
+*.csv
