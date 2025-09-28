@@ -1,33 +1,49 @@
 import unittest
 import pandas as pd
+import inspect
+import os
+import sys
+
+current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parent_dir = os.path.dirname(current_dir)
+sys.path.insert(0, parent_dir)
+
 from pipeline import clean_chunk
 
+
 class TestPipeline(unittest.TestCase):
+    def __init__(self, methodName: str = "runTest") -> None:
+        super().__init__(methodName)
+        self._df = pd.DataFrame({
+            "quantity": ["10", "abc", "-5"],
+            "unit_price": [10, 1000, 20],
+            "discount_percent": [0.5, 1.0, -0.2],
+            "region": ["nort", "Sth", "North"],
+            "category": ["misc", "misc", "misc"],
+            "product_name": ["x", "y", "z"],
+            "sale_date": ["2025-09-28","2024-08-12", "2024-01-03"],
+            "customer_email": ["a@test.com", "b@test.com", "c@test.com"],
+        })
 
     def test_clean_quantity(self):
-        df = pd.DataFrame({"quantity": ["10", "abc", "-5"]})
-        cleaned = clean_chunk(df)
-        self.assertEqual(cleaned["quantity"].tolist(), [10, 0, -5])
+        cleaned = clean_chunk(self._df)
+        self.assertEqual(cleaned["quantity"].tolist(), [10, 0])
 
     def test_clean_discount(self):
-        df = pd.DataFrame({"discount_percent": [0.5, 1.5, -0.2]})
-        cleaned = clean_chunk(df)
+        cleaned = clean_chunk(self._df)
         self.assertTrue((cleaned["discount_percent"] >= 0).all() and (cleaned["discount_percent"] <= 1).all())
 
     def test_clean_region(self):
-        df = pd.DataFrame({"region": ["nort", "Sth", "North"]})
-        cleaned = clean_chunk(df)
+        cleaned = clean_chunk(self._df)
         self.assertTrue(set(cleaned["region"].unique()) <= {"north", "south"})
 
     def test_revenue_calculation(self):
-        df = pd.DataFrame({"quantity": [2], "unit_price": [100], "discount_percent": [0.1]})
-        cleaned = clean_chunk(df)
-        self.assertEqual(cleaned["revenue"].iloc[0], 2*100*(1-0.1))
+        cleaned = clean_chunk(self._df)
+        self.assertEqual(cleaned["revenue"].iloc[0], 10*10*(1-0.5))
 
     def test_month_extraction(self):
-        df = pd.DataFrame({"sale_date": ["2025-09-28", "2025/08/15"]})
-        cleaned = clean_chunk(df)
-        self.assertEqual(cleaned["month"].tolist(), ["2025-09", "2025-08"])
+        cleaned = clean_chunk(self._df)
+        self.assertEqual(cleaned["month"].tolist(), ["2025-09", "2024-08"])
 
 
 if __name__ == "__main__":

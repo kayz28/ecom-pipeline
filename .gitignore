@@ -5,3 +5,4 @@ data/cleaned/
 *.parquet
 *.duckdb
 *.csv
+__pycache__

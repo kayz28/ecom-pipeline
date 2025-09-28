@@ -14,7 +14,8 @@ os.makedirs(CLEANED_DIR, exist_ok=True)
 def clean_chunk(df: pd.DataFrame) -> pd.DataFrame:
     df["quantity"] = pd.to_numeric(df["quantity"], errors="coerce").fillna(0).astype(int)
     df["unit_price"] = pd.to_numeric(df["unit_price"], errors="coerce").fillna(0.0)
-    df = df[pd.to_numeric(df["discount_percent"], errors="coerce").fillna(0.0) <= 1]
+    df = df[(pd.to_numeric(df["discount_percent"], errors="coerce").fillna(-1) >= 0)
+            & (pd.to_numeric(df["discount_percent"], errors="coerce").fillna(-1) <= 1)]
 
     df["region"] = df["region"].astype(str).str.lower().str.strip().apply(
     lambda x: "north" if re.fullmatch(r"n.*(orth)?", x) else
