@@ -44,6 +44,9 @@ Generate raw data -> read raw data in chunks -> clean data -> write in partition
 
 ---
 
+[Watch demo video](demo/Screen Recording 2025-09-28 at 3.02.50 PM 2.mov)
+
+
 ## Project Structure
 
 pipeline-project/
