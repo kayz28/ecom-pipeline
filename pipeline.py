@@ -140,7 +140,7 @@ def create_analytics():
 
     #revenue each category made per month
     con.execute("""
-    CREATE TABLE category_sales_trend AS
+    CREATE OR REPLACE TABLE category_sales_trend AS
     SELECT 
         month,
         category,
@@ -152,7 +152,7 @@ def create_analytics():
 """)
     #For each customer, total orders, revenue, and average discount  
     con.execute("""
-        CREATE TABLE customer_order_summary AS
+        CREATE OR REPLACE TABLE customer_order_summary AS
         SELECT
             customer_email,
             COUNT(DISTINCT order_id) AS total_orders,
@@ -165,7 +165,7 @@ def create_analytics():
 """)
     #discounts affect revenue per category
     con.execute("""
-        CREATE TABLE discount_effectiveness AS
+        CREATE OR REPLACE TABLE discount_effectiveness AS
         SELECT
             category,
             AVG(discount_percent) AS avg_discount,
