@@ -44,7 +44,7 @@ Generate raw data -> read raw data in chunks -> clean data -> write in partition
 
 ---
 
-[Watch demo video](demo/Screen%20Recording%202025-09-28%20at%203.02.50%20PM%202.mp4)
+[Watch demo video](demo/Screen%20Recording%202025-09-28%20at%203.02.50%20PM%202.mov)
 
 
 
