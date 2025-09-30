@@ -6,3 +6,4 @@ data/cleaned/
 *.duckdb
 *.csv
 __pycache__
+data/*

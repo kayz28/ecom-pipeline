@@ -100,13 +100,13 @@ def main():
     parser.add_argument("--offset_file", type=str, default="/Users/kartikanand/pipeline-project/offset.txt", help="Offset tracking file")
     parser.add_argument("--batch_size", type=int, default=100000, help="Number of rows per batch")
     parser.add_argument("--num_threads", type=int, default=10, help="Number of producer threads")
-    parser.add_argument("--kafka_topic", type=str, default="sales_topic2", help="Kafka topic name")
+    parser.add_argument("--kafka_topic", type=str, default="sales_topic3", help="Kafka topic name")
     args = parser.parse_args()
-    with open(args.CSV_FILE, "r", encoding="utf-8") as f:
+    with open(args.csv_file, "r", encoding="utf-8") as f:
         header = f.readline().strip().split(",")
 
     threads = []
-    for tid in range(args.threads):
+    for tid in range(args.num_threads):
         t = threading.Thread(target=worker, args=(tid, args, header))
         t.start()
         threads.append(t)
