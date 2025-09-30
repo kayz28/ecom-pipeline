@@ -27,6 +27,12 @@ This project implements a **scalable data engineering pipeline** for a mid-size 
 ## Flow
 Generate raw data -> read raw data in chunks -> clean data -> write in partitioned format (month/region) -> create table in duck db on top partitioned parquet files -> create aggregates -> create dashboards
 
+## Scalable pipeline flow
+csv -> read data -> producer workers -> push data in kafka -> consumer worker -> partition data -> write into file -> create aggregates -> create dashboards
+
+## Scalable pipeline architecture
+<img width="1207" height="466" alt="Screenshot 2025-09-30 at 9 31 20 PM" src="https://github.com/user-attachments/assets/2799bde6-c037-4190-93e2-55e27e861d11" />
+
 Currently we are using single CSV as source if we need to have incremental data loads then we will use Airflow while maintaining offsets etc.
 
 ## Data Schema
